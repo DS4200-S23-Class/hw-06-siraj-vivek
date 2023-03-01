@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html lang='en'>
 
+
 <head>
-    <meta charset=utf-8/>
-    <link rel="stylesheet" href="style.css">
-    <title>hw-06</title>
-    <script src="js/d3.v6.1.1/d3.min.js"></script>
+  <meta charset='utf-8'>
+
+  <link rel="stylesheet" href="style.css">
+  <script src='js/d3.v6.1.1/d3.min.js'></script>
+
+  <title>hw-06</title>
+
 </head>
 
+
 <body>
-    
-    <!-- HEADER -->
-    <h1 class="centered">hw-06 - D3 Brushing & Linking</h1>
 
-    <div class="row">
-        <div class="col">
-            <h4 class="centered">Petal Length vs. Sepal Length</h4>
-            <div id="scatter-1"></div>
-          </div>
-          <div class="col">
-            <h4 class="centered">Petal_Width vs Sepal_Width</h4>
-            <div id="scatter-2"></div>
-          </div>
-          <div class="col">
-            <h4 class="centered">Bar Graph of Species Counts</h4>
-            <div class="bar"></div>
-          </div>
+  <h1>hw-06 - D3 Brushing & Linking</h1>
 
+  <div class='row'>
 
+    <div class='col'>
+      <h3>Sepal_Length vs. Petal_Length</h3>
+      <div id="scatter_01"></div>
     </div>
 
+    <div class='col'>
+      <h3>Sepal_Width vs. Petal_Width</h3>
+      <div id="scatter_02"></div>
+    </div>
 
+    <div class='col'>
+      <h3>Bar Graph of Species Counts</h3>
+      <div id="bar_plot"></div>
+    </div>
+
+  </div>
+
+  <div>
+    <h3 class="centered">Acknowledgements</h3>
     <div>
-        <h3 class="centered">Acknowledgements</h3>
-        <div>
-          <ul>
-              <li><a href="https://d3js.org/">Source 1</a></li>
-              <li><a href="https://leanpub.com/D3-Tips-and-Tricks/read">Source 2</a></li>
-              <li><a href="https://d3-graph-gallery.com/graph/interactivity_brush.html#realgraph">Source 3</a></li>
-              <li><a href="https://www.fluidencodings.com/teaching-materials/cc-for-the-web/v1/page.php?pid=data-joins">Source 4</a></li>
-          </ul>
-      </div>
-    </div>
+      <ul>
+          <li><a href="https://d3js.org/">Source 1</a></li>
+          <li><a href="https://leanpub.com/D3-Tips-and-Tricks/read">Source 2</a></li>
+          <li><a href="https://d3-graph-gallery.com/graph/interactivity_brush.html#realgraph">Source 3</a></li>
+          <li><a href="https://www.fluidencodings.com/teaching-materials/cc-for-the-web/v1/page.php?pid=data-joins">Source 4</a></li>
+      </ul>
+  </div>
+</div>
 
-    <!-- Include js at end of body -->
-    <script src="main.js"></script>
+
+  <script src='main.js'></script>
+
 </body>
 
 </html>
