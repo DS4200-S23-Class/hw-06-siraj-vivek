@@ -139,59 +139,64 @@ d3.csv("data/iris.csv").then((data) => {
   }
 
   /*-------------------------------- BAR PLOT --------------------------------*/
-// HARD ENCODED DATA COUNTS OF SPECIES
-const DATA_2 = [
-  { Group: "Experimental Group 1", Value: 50 },
-  { Group: "Experimental Group 2", Value: 50 },
-  { Group: "Experimental Group 3", Value: 50 }
-];
+  const BAR = d3.select('.bar')
+  .attr("class", "bar-chart")
+  .append("svg")
+  .attr("height", FRAME_HEIGHT)
+  .attr("width", FRAME_WIDTH);
 
-const BAR_WIDTH = 60;
+// scales the data properly
+const BAR_HEIGHT = FRAME_HEIGHT - MARGINS.top - MARGINS.bottom;
+const BAR_WIDTH = FRAME_WIDTH - MARGINS.left - MARGINS.right;
 
-const BAR = d3.select("div.bar") 
-    .append("svg") 
-    .attr("height", FRAME_HEIGHT)   
-    .attr("width", FRAME_WIDTH)
-    .attr("class", "frame");
+const bar_data = [{"Species": "virginica", 'Count': 50},
+                  {"Species": "versicolor", 'Count': 50},
+                  {"Species": "setosa", 'Count': 50}]
 
 
-// X AND Y LINEAR SCALES
-const Y_SCALE = d3.scaleLinear() 
-    .domain([0, 50])  
-    .range([GRAPH_HEIGHT, 0]);
+const xScaleBar = d3.scaleBand().range([0, BAR_WIDTH]).padding(0.2);
+const yScaleBar = d3.scaleLinear().range([BAR_HEIGHT, 0]);
 
-const X_SCALE = d3.scaleBand()
-.range([ 0, GRAPH_WIDTH ])
-.domain(data.map(function(d) { return d.Species; }))
-.padding(0.3);
+xScaleBar.domain(bar_data.map((d) => {
+  return d.Species
+}));
+yScaleBar.domain([0, d3.max(bar_data, (d) => {
+  return d.Count
+}) + 10])
+// creates the actual bars
 
-// APPEND X AND Y AXES
+let bars = BAR.selectAll("bars")
+  .data(bar_data)
+  .enter()
+  .append("rect")
+  .attr("class", (d) => {
+      return d.Species
+  })
+  .attr("x", (d) => {
+      return (xScaleBar(d.Species) + MARGINS.left)
+  })
+  .attr("y", (d) => {
+      return ( MARGINS.left + yScaleBar(d.Count))
+  })
+  .attr("width", xScaleBar.bandwidth())
+  .attr("height", (d) => {
+      return BAR_HEIGHT - yScaleBar(d.Count)
+  });
+
 BAR.append("g")
-.attr("transform", "translate(" + MARGINS.left + 
-"," + (GRAPH_HEIGHT+ MARGINS.bottom) + ")")
-.call(d3.axisBottom(X_SCALE))
-.selectAll("text")
-.attr("font-size", "10px");
+  .attr("transform", "translate(" + MARGINS.top + "," +
+      (BAR_HEIGHT + MARGINS.top) + ")")
+  .call(d3.axisBottom(xScaleBar).ticks(11))
+  .attr("font-size", "15px");
 
 BAR.append("g")
-.attr("transform", "translate(" + MARGINS.left + "," + MARGINS.top + ")") 
-.call(d3.axisLeft(Y_SCALE))
-.selectAll("text")
-.attr("font-size", "10px");
-
-// APPEND THE BAR GRAPH 
-let barPlot = BAR.append("g")
-.selectAll("bar")
-.data(data)
-.enter()
-.append("rect")
-.attr("x", function(d) { return X_SCALE(d.Species) + MARGINS.left; })
-.attr("y", function(d) { return Y_SCALE(50) + MARGINS.top; })
-.attr("width", BAR_WIDTH)
-.attr("height", function(d) { return GRAPH_HEIGHT - Y_SCALE(50); })
-	    .attr("fill", (d) => { return COLOR(d.Species); })
-.attr("fill", (d) => { return COLOR(d.Species); })
-.style("opacity", 0.5);
+  .attr("transform", "translate(" +
+      (MARGINS.left) + "," + (MARGINS.top) + ")")
+  .call(d3.axisLeft(yScaleBar).ticks(11))
+  .attr("font-size", "15px");
 
 });
+
+
+
 
