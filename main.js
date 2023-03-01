@@ -42,6 +42,7 @@ d3.csv("data/iris.csv").then((data) => {
       .data(data) // Passed from .then  
       .enter()       
       .append("circle")
+            .attr("class", (d) => { return d.Species})
       	    .attr("id", (d) => { return ("(" + d.Sepal_Length + ", " + d.Petal_Length + ")"); })
       	    .attr("cx", (d) => { return (X_SCALE_01(d.Sepal_Length) + MARGINS.left); }) 
             .attr("cy", (d) => { return (Y_SCALE_01(d.Petal_Length) + MARGINS.top); }) 
@@ -91,6 +92,7 @@ d3.csv("data/iris.csv").then((data) => {
 	    .attr("id", (d) => { return ("(" + d.Sepal_Width + ", " + d.Petal_Width + ")"); })
 	    .attr("cx", (d) => { return (X_SCALE_02(d.Sepal_Width) + MARGINS.left); }) 
 	    .attr("cy", (d) => { return (Y_SCALE_02(d.Petal_Width) + MARGINS.top); }) 
+      .attr("class", (d) => { return d.Species})
 	    .attr("r", 5)
 	    .attr("fill", (d) => { return COLOR(d.Species); })
 	    .style("opacity", 0.5);
@@ -134,7 +136,7 @@ d3.csv("data/iris.csv").then((data) => {
       return isHighlighted(extent, (X_SCALE_02(d.Sepal_Width) + MARGINS.left), (Y_SCALE_02(d.Petal_Width) + MARGINS.top))});
     scatterPts01.classed("selected", function(d) { 
       return isHighlighted(extent, (X_SCALE_02(d.Sepal_Width) + MARGINS.left), (Y_SCALE_02(d.Petal_Width) + MARGINS.top))});
-    barPlot.classed("selected", function(d) { 
+    bars.classed("selected", function(d) { 
       return isHighlighted(extent, (X_SCALE_02(d.Sepal_Width) + MARGINS.left), (Y_SCALE_02(d.Petal_Width) + MARGINS.top))});
   }
 
