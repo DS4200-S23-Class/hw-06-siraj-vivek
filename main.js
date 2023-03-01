@@ -129,7 +129,7 @@ d3.csv("data/iris.csv").then((data) => {
   function brushTrigger(event) {
     extent = event.selection;
 
-    // CONNECTOR BETWEEN CHART AND 
+    // CONNECTOR BETWEEN CHART AND BRUSH
     scatterPts02.classed("selected", function(d) { 
       return isHighlighted(extent, (X_SCALE_02(d.Sepal_Width) + MARGINS.left), (Y_SCALE_02(d.Petal_Width) + MARGINS.top))});
     scatterPts01.classed("selected", function(d) { 
