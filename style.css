@@ -1,0 +1,21 @@
+* {
+    font-family: Arial;
+}
+
+.centered {
+    text-align: center;
+}
+
+.bar rect {
+    fill: steelblue;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col {
+    flex: 1;
+    padding: 10px;
+  }
